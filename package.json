@@ -4,6 +4,8 @@
   "description": "Card game based on the original game of Idiot.",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon server.js",
+    "compile": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +21,14 @@
   "homepage": "https://github.com/blackeka/half-wit-cards#readme",
   "dependencies": {
     "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-latest": "^6.24.1",
-    "babel-preset-react": "^6.24.1"
+    "babel-preset-react": "^6.24.1",
+    "express": "^4.15.5",
+    "path": "^0.12.7",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.6.0",
+    "webpack-dev-middleware": "^1.12.0"
   }
 }
