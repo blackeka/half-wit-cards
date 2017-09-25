@@ -1,0 +1,20 @@
+{
+  "name": "half-wit-cards",
+  "version": "1.0.0",
+  "description": "Card game based on the original game of Idiot.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blackeka/half-wit-cards.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blackeka/half-wit-cards/issues"
+  },
+  "homepage": "https://github.com/blackeka/half-wit-cards#readme"
+}
