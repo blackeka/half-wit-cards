@@ -56,6 +56,13 @@ class Game extends React.Component {
               this.setState({
                 p2draw: deal(this.state.cards, 17),
                 // cards: this.state.cards.slice(0, 0)
+              }, () => {
+                console.log(`should have 3 ${this.state.p2river}`)
+                console.log(`should have 6 ${this.state.p2hand}`)
+                console.log(`should have 17 ${this.state.p2draw}`)
+                console.log(`should have 3 ${this.state.p1river}`)
+                console.log(`should have 6 ${this.state.p1hand}`)
+                console.log(`should have 17 ${this.state.p1draw}`)
               });
             })
           })

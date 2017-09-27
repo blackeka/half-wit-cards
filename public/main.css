@@ -52,8 +52,7 @@ span.bottom-right {
 	z-index: -1;	
 }
 
-#card-back {
-
+.card .rank #Spades #card-back {
 	background-image: url('images/minion.png');
 	background-size: contain;
 	background-repeat:no-repeat;	
@@ -69,7 +68,39 @@ span.bottom-right {
 }
 
 .player2-draw {
+	border: solid 2px #340DE4;
+	border-radius: 12px;
+	float:left;
+	padding: 3px;
+	margin: 1px;
+}
+
+.player2-hand {
+	border: solid 2px #E44A0D;
+	border-radius: 12px;
+	float:left;
+	padding: 3px;
+	margin: 1px;
+}
+
+.player1-river {
 	border: solid 2px #BCE40D;
+	border-radius: 12px;
+	float:left;
+	padding: 3px;
+	margin: 1px;
+}
+
+.player1-draw {
+	border: solid 2px #340DE4;
+	border-radius: 12px;
+	float:left;
+	padding: 3px;
+	margin: 1px;
+}
+
+.player1-hand {
+	border: solid 2px #E44A0D;
 	border-radius: 12px;
 	float:left;
 	padding: 3px;

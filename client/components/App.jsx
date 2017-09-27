@@ -14,7 +14,7 @@ class App extends React.Component {
     return (
       <div className="heart">
         <h1 >Half-Wit Cards</h1>
-        <Card />
+        <Game />
       </div>
     );
   }
