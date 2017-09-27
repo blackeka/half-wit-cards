@@ -30,6 +30,8 @@
     "mongoose": "^4.11.13",
     "path": "^0.12.7",
     "react": "^15.6.1",
+    "react-card": "^1.0.4",
+    "react-deck": "^2.0.2",
     "react-dom": "^15.6.1",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0"

@@ -1,0 +1,77 @@
+.card {
+	width: 95px;
+	height: 150px;
+	background-color: #FFFFFF;
+	border: solid 2px #2E86A1;
+	border-radius: 12px;
+	float:left;
+	padding: 3px;
+	margin: 1px;
+}
+
+span.bottom-right {
+	float: right;
+}
+
+.card .rank {
+	color: #22022B;
+	font-size:15pt;
+	font-family: 'Kaushan Script', cursive;
+}
+
+.card .suit {
+	height: 100px;
+	width: 90px;
+}
+
+#Hearts {
+	background-image: url('images/Heart.png');
+	background-size: contain;
+	background-repeat:no-repeat;
+	z-index: -1;
+}
+
+#Diamonds {
+  background-image: url('images/Diamond.png');
+	background-size: contain;
+	background-repeat:no-repeat;
+	z-index: -1;
+}
+
+#Clubs {
+	background-image: url('images/Club.png');
+	background-size: contain;
+	background-repeat:no-repeat;
+	z-index: -1;
+}
+
+#Spades {
+  background-image: url('images/Spade.png');
+	background-size: contain;
+	background-repeat:no-repeat;
+	z-index: -1;	
+}
+
+#card-back {
+
+	background-image: url('images/minion.png');
+	background-size: contain;
+	background-repeat:no-repeat;	
+	z-index: 1;
+}
+
+.player2-river {
+	border: solid 2px #BCE40D;
+	border-radius: 12px;
+	float:left;
+	padding: 3px;
+	margin: 1px;
+}
+
+.player2-draw {
+	border: solid 2px #BCE40D;
+	border-radius: 12px;
+	float:left;
+	padding: 3px;
+	margin: 1px;
+}

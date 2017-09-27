@@ -1,4 +1,6 @@
 import React from 'react';
+import Card from './Card.jsx';
+import Game from './Game.jsx';
 
 class App extends React.Component {
   constructor() {
@@ -10,10 +12,13 @@ class App extends React.Component {
  
   render() {
     return (
-      <h1>
-        React Component Rendering
-      </h1>
+      <div className="heart">
+        <h1 >Half-Wit Cards</h1>
+        <Card />
+      </div>
     );
   }
 }
+
+{/* <Card /> */}
 export default App;

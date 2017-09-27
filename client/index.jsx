@@ -1,7 +1,6 @@
-console.log('Getting Ready');
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.jsx';
+import App from './components/App.jsx';
  
 document.addEventListener('DOMContentLoaded', function() {
   ReactDOM.render(
