@@ -34,6 +34,11 @@ const server = app.listen(app.get('port'), () => {
 //socket setup
 const io = socket(server);
 
-io.on('connection', () => {
-  console.log('-------made socket connection-------');
+io.on('connection', (client) => {
+  client.on('subscribeToTimer', (interval) => {
+    console.log('----client is subscribing to timer with interval ', interval);
+    setInterval(() => {
+      client.emit('timer', new Date());
+    }, interval);
+  });
 })
