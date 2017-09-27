@@ -1,5 +1,5 @@
 import React from 'react';
-import {makeDeck, shuffle, deal} from '../helpers/deck.jsx';
+import {makeDeck, shuffle, deal, drawCard, pickupPile} from '../helpers/deck.jsx';
 
 class Game extends React.Component {
   constructor(props) {
@@ -20,8 +20,8 @@ class Game extends React.Component {
       p1hback: false
     };
     this.dealClick = this.dealClick.bind(this);
+    this.onDraw = this.onDraw.bind(this);
   }
-  
   
   componentWillMount() {
     let cards = makeDeck();
@@ -31,34 +31,26 @@ class Game extends React.Component {
   }
   
   dealClick() {
-    console.log('in click handler')
-    console.log(this.state.cards, "begin")
-    // console.log(deal(this.state.cards, 3))
     this.setState({
       p2river: deal(this.state.cards, 3),
       // cards: this.state.cards.slice(0, 49)
     }, () => {
-      console.log(this.state.cards, "-3")
       this.setState({
         p1river: deal(this.state.cards, 3),
         // cards: this.state.cards.slice(0, 46)
       }, () => {
-        console.log(this.state.cards, "-6")
         this.setState({
           p2hand: deal(this.state.cards, 6),
           // cards: this.state.cards.slice(0, 40)
         }, () => {
-          console.log(this.state.cards, "-12")
           this.setState({
             p1hand: deal(this.state.cards, 6),
             // cards: this.state.cards.slice(0, 34)
           }, () => {
-            console.log(this.state.cards, "-18")
             this.setState({
               p2draw: deal(this.state.cards, 17),
               // cards: this.state.cards.slice(0, 17)
             }, () => {
-              console.log(this.state.cards, "17-left")
               this.setState({
                 p1draw: deal(this.state.cards, 16),
                 // cards: this.state.cards.slice(0, 0)
@@ -74,6 +66,41 @@ class Game extends React.Component {
     $('.card-back').toggleClass('card-front')
   }
 
+  onDraw(e) {
+    console.log(this.state.p1draw)
+    //pop the last one off of Draw,
+    var draw = []
+    this.state.p1draw.map((card) => {
+      draw.push(card)
+      return card;
+    })
+    // console.log(draw, 'hand', hand, "omg it worked")
+    
+    // let pile = e.target.value;
+    // // pile = pile.split(',')
+    // let hand = e.target.id + "hand";
+    // console.log('pile', pile.split(','))
+    if (draw) {
+      var card = draw[draw.length - 1];
+      var hand = []
+      for (let i = 0; i < this.state.p1hand.length; i++) {
+        let current = this.state.p1hand[i];
+        hand.push(current);
+        if (i === this.state.p1hand.length - 1) {
+          hand.push(card);
+        }
+      }
+      draw.pop()
+      this.setState({
+        p1hand: hand,
+        p1draw: draw
+      }, () => {
+        console.log(this.state.p1hand, 'should have 7')
+      });
+    }
+
+  }
+
   render() {
     return (
       <div>
@@ -81,7 +108,7 @@ class Game extends React.Component {
           <div className="player2-river">
             {this.state.p2river ? 
               this.state.p2river.map((card) => (
-                <div className="card" onClick={this.flip}>
+                <div className="card" id="p2river" onClick={this.flip}>
                   
                   <div className="card-back">
                     <div className="rank hidden">
@@ -100,21 +127,9 @@ class Game extends React.Component {
           </div>
           <div className="player2-draw">
             {this.state.p2draw ? 
-                this.state.p2draw.map((card) => (
-                  <div className="card">
-                    <div className="card-back">
-                      <div className="rank hidden">
-                        <span>{card.rank}</span>
-                        <div className="suit" id={card.suit}>
-                          <div className={card.suit}>
-
-                          </div>
-                        </div>
-                        <span className="bottom-right">{card.rank}</span>
-                      </div>
-                    </div>  
-                  </div>
-                )) : <div></div>
+              <div className="card cards-pile" id="p2" >
+                
+              </div> : <div></div>
               }
           </div>
           <div className="player2-hand">
@@ -166,21 +181,9 @@ class Game extends React.Component {
           </div>
           <div className="player1-draw">
             {this.state.p1draw ? 
-                this.state.p1draw.map((card) => (
-                  <div className="card">
-                  <div className="card-back">
-                    <div className="rank hidden">
-                      <span>{card.rank}</span>
-                      <div className="suit" id={card.suit}>
-                        <div className={card.suit}>
-
-                        </div>
-                      </div>
-                      <span className="bottom-right">{card.rank}</span>
-                    </div>
-                  </div>  
-                </div>
-              )) : <div></div>
+                <div className="card cards-pile">
+                <button value={this.state.p1draw} onClick={this.onDraw}>DRAW</button>
+                </div> : <div></div>
               }
           </div>
           <div className="player1-hand">
@@ -207,3 +210,20 @@ class Game extends React.Component {
 }
 
 export default Game;
+
+{/* 
+this.state.p1draw.map((card) => (
+                  <div className="card">
+                  <div className="card-back">
+                    <div className="rank hidden">
+                      <span>{card.rank}</span>
+                      <div className="suit" id={card.suit}>
+                        <div className={card.suit}>
+
+                        </div>
+                      </div>
+                      <span className="bottom-right">{card.rank}</span>
+                    </div>
+                  </div>  
+                </div>
+              )) : <div></div> */}

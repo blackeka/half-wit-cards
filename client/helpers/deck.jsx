@@ -66,6 +66,15 @@ const pickupPile = (pile, hand) => {
   return hand.concat(pile);
 }
 
+const drawCard = (pile) => {
+  if (Array.isArray(pile)) {
+    let card = pile[pile.length - 1];
+    console.log('card in helpwer', card.rank)
+    pile.pop();
+    return card;
+  }
+}
+
 const displayCards = (deck) => {
   // return (
   //   {deck.map((card) => (
@@ -84,7 +93,9 @@ const displayCards = (deck) => {
 module.exports = {
   makeDeck,
   deal,
-  shuffle
+  shuffle,
+  pickupPile,
+  drawCard
 }  
     
     
