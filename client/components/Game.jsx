@@ -7,11 +7,17 @@ class Game extends React.Component {
     this.state = {
       cards: [],
       p2river: [],
-      p2draw: null,
-      p2hand: null,
-      p1river: null,
-      p1draw: null,
-      p1hand: null
+      p2rback: true,
+      p2draw: [],
+      p2dback: true,
+      p2hand: [],
+      p2hback: true,
+      p1river: [],
+      p1rback: true,
+      p1draw: [],
+      p1dback: true,
+      p1hand: [], 
+      p1hback: false
     };
     this.dealClick = this.dealClick.bind(this);
   }
@@ -54,21 +60,18 @@ class Game extends React.Component {
             }, () => {
               console.log(this.state.cards, "17-left")
               this.setState({
-                p2draw: deal(this.state.cards, 17),
+                p1draw: deal(this.state.cards, 16),
                 // cards: this.state.cards.slice(0, 0)
-              }, () => {
-                console.log(`should have 3 ${this.state.p2river}`)
-                console.log(`should have 6 ${this.state.p2hand}`)
-                console.log(`should have 17 ${this.state.p2draw}`)
-                console.log(`should have 3 ${this.state.p1river}`)
-                console.log(`should have 6 ${this.state.p1hand}`)
-                console.log(`should have 17 ${this.state.p1draw}`)
               });
             })
           })
         })
       })
     }) 
+  }
+
+  flip() {
+    $('.card-back').toggleClass('card-front')
   }
 
   render() {
@@ -78,15 +81,18 @@ class Game extends React.Component {
           <div className="player2-river">
             {this.state.p2river ? 
               this.state.p2river.map((card) => (
-                <div className="card card-back">
-                  <div className="rank">
-                    <span>{card.rank}</span>
-                    <div className="suit" id={card.suit}>
-                      <div className={card.suit}>
+                <div className="card" onClick={this.flip}>
+                  
+                  <div className="card-back">
+                    <div className="rank hidden">
+                      <span>{card.rank}</span>
+                      <div className="suit" id={card.suit}>
+                        <div className={card.suit}>
 
+                        </div>
                       </div>
+                      <span className="bottom-right">{card.rank}</span>
                     </div>
-                    <span className="bottom-right">{card.rank}</span>
                   </div>
                 </div>
               )) : <div></div>
@@ -95,16 +101,18 @@ class Game extends React.Component {
           <div className="player2-draw">
             {this.state.p2draw ? 
                 this.state.p2draw.map((card) => (
-                  <div className="card" id="card-back">
-                    <div className="rank">
-                      <span>{card.rank}</span>
-                      <div className="suit" id={card.suit}>
-                        <div className={card.suit}>
+                  <div className="card">
+                    <div className="card-back">
+                      <div className="rank hidden">
+                        <span>{card.rank}</span>
+                        <div className="suit" id={card.suit}>
+                          <div className={card.suit}>
 
+                          </div>
                         </div>
+                        <span className="bottom-right">{card.rank}</span>
                       </div>
-                      <span className="bottom-right">{card.rank}</span>
-                    </div>
+                    </div>  
                   </div>
                 )) : <div></div>
               }
@@ -112,8 +120,9 @@ class Game extends React.Component {
           <div className="player2-hand">
             {this.state.p2hand ? 
                 this.state.p2hand.map((card) => (
-                  <div className="card" id="card-back">
-                    <div className="rank">
+                  <div className="card">
+                  <div className="card-back">
+                    <div className="rank hidden">
                       <span>{card.rank}</span>
                       <div className="suit" id={card.suit}>
                         <div className={card.suit}>
@@ -122,8 +131,9 @@ class Game extends React.Component {
                       </div>
                       <span className="bottom-right">{card.rank}</span>
                     </div>
-                  </div>
-                )) : <div></div>
+                  </div>  
+                </div>
+              )) : <div></div>
               }
           </div>
         </div>
@@ -138,8 +148,9 @@ class Game extends React.Component {
           <div className="player1-river">
             {this.state.p1river ? 
                 this.state.p1river.map((card) => (
-                  <div className="card" id="card-back">
-                    <div className="rank">
+                  <div className="card">
+                  <div className="card-back">
+                    <div className="rank hidden">
                       <span>{card.rank}</span>
                       <div className="suit" id={card.suit}>
                         <div className={card.suit}>
@@ -148,15 +159,17 @@ class Game extends React.Component {
                       </div>
                       <span className="bottom-right">{card.rank}</span>
                     </div>
-                  </div>
-                )) : <div></div>
+                  </div>  
+                </div>
+              )) : <div></div>
               }
           </div>
           <div className="player1-draw">
             {this.state.p1draw ? 
                 this.state.p1draw.map((card) => (
-                  <div className="card" id="card-back">
-                    <div className="rank">
+                  <div className="card">
+                  <div className="card-back">
+                    <div className="rank hidden">
                       <span>{card.rank}</span>
                       <div className="suit" id={card.suit}>
                         <div className={card.suit}>
@@ -165,14 +178,15 @@ class Game extends React.Component {
                       </div>
                       <span className="bottom-right">{card.rank}</span>
                     </div>
-                  </div>
-                )) : <div></div>
+                  </div>  
+                </div>
+              )) : <div></div>
               }
           </div>
           <div className="player1-hand">
             {this.state.p1hand ? 
                 this.state.p1hand.map((card) => (
-                  <div className="card">
+                  <div className="card card-front ">
                     <div className="rank">
                       <span>{card.rank}</span>
                       <div className="suit" id={card.suit}>

@@ -24,41 +24,43 @@ span.bottom-right {
 	width: 90px;
 }
 
-#Hearts {
+.card.suit.Hearts {
 	background-image: url('images/Heart.png');
 	background-size: contain;
 	background-repeat:no-repeat;
 	z-index: -1;
 }
 
-#Diamonds {
+.card.suit.Diamonds {
   background-image: url('images/Diamond.png');
 	background-size: contain;
 	background-repeat:no-repeat;
 	z-index: -1;
 }
 
-#Clubs {
+.card.suit.Clubs {
 	background-image: url('images/Club.png');
 	background-size: contain;
 	background-repeat:no-repeat;
 	z-index: -1;
 }
 
-#Spades {
+.card.suit.Spades {
   background-image: url('images/Spade.png');
 	background-size: contain;
 	background-repeat:no-repeat;
 	z-index: -1;	
 }
 
-.card .rank #Spades #card-back {
+.card-back {
 	background-image: url('images/minion.png');
 	background-size: contain;
 	background-repeat:no-repeat;	
 	z-index: 1;
 }
-
+div.hidden {
+	visibility: hidden;
+}
 .player2-river {
 	border: solid 2px #BCE40D;
 	border-radius: 12px;

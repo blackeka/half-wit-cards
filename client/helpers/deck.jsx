@@ -53,6 +53,19 @@ const shuffle = (deck) => {
   return deck;
 }
 
+const chooseCard = (pile, n) => {
+  let card = undefined;
+  if (pile.length && n >= 0) {
+    card = pile[n];
+    pile.splice(n, 1);
+  } 
+  return card;
+}
+
+const pickupPile = (pile, hand) => {
+  return hand.concat(pile);
+}
+
 const displayCards = (deck) => {
   // return (
   //   {deck.map((card) => (
