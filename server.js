@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const webpackConfig = require('./webpack.config.js');
 const bodyParser = require('body-parser');
 const path = require('path');
+const socket = require('socket.io');
 const db = require('./db/connect.js');
 const routes = require('./routes.js');
 
@@ -26,6 +27,13 @@ app.use(webpackDevMiddleware(compiler, {
   historyApiFallback: true,
 }));
 
-app.listen(app.get('port'), () => {
+const server = app.listen(app.get('port'), () => {
   console.log(`Listening on ${app.get('port')}`);
 });
+
+//socket setup
+const io = socket(server);
+
+io.on('connection', () => {
+  console.log('-------made socket connection-------');
+})

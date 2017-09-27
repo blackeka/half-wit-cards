@@ -33,6 +33,7 @@
     "react-card": "^1.0.4",
     "react-deck": "^2.0.2",
     "react-dom": "^15.6.1",
+    "socket.io": "^2.0.3",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0"
   }
