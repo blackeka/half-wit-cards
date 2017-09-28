@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/blackeka/half-wit-cards#readme",
   "dependencies": {
+    "axios": "^0.16.2",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-latest": "^6.24.1",
@@ -31,9 +32,11 @@
     "mongoose": "^4.11.13",
     "path": "^0.12.7",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.31.3",
     "react-card": "^1.0.4",
     "react-deck": "^2.0.2",
     "react-dom": "^15.6.1",
+    "react-router-dom": "^4.2.2",
     "socket.io": "^2.0.3",
     "webpack": "^3.6.0",
     "webpack-dev-middleware": "^1.12.0"

@@ -9,11 +9,7 @@ const gameBoardHandler = require('./controllers/gameBoardHandler.js');
 //Route to create a new account
 route.post('/signup', signUpHandler);
 //Route to login as existing user
-// route.get('/login', (req, res) => {
-//   loginHandler(req.body.username, req.body.password, (err, data) => {
-
-//   })
-// });
+route.get('/login', loginHandler);
 // //route to retrieve player stats
 // route.get('/stats', playerStatsHandler);
 // //route to update user game stats

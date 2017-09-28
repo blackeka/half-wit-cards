@@ -13,7 +13,7 @@ const compiler = webpack(webpackConfig);
 
 app.use(bodyParser.json())
 app.use(express.static(__dirname + '/public'));
-app.use('/app', routes);
+app.use('/', routes);
 
 app.set('port', (process.env.PORT || 3000));
 
@@ -31,14 +31,9 @@ const server = app.listen(app.get('port'), () => {
   console.log(`Listening on ${app.get('port')}`);
 });
 
-//socket setup
+// socket setup
 const io = socket(server);
 
 io.on('connection', (client) => {
-  client.on('subscribeToTimer', (interval) => {
-    console.log('----client is subscribing to timer with interval ', interval);
-    setInterval(() => {
-      client.emit('timer', new Date());
-    }, interval);
-  });
+  console.log('---made socket connection---');
 })
