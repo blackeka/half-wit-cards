@@ -39,14 +39,14 @@ span.bottom-right {
 }
 
 .card.suit.Clubs {
-	background-image: url('images/Club.png');
+	content: url('images/Club.png');
 	background-size: contain;
 	background-repeat:no-repeat;
 	z-index: -1;
 }
 
 .card.suit.Spades {
-  background-image: url('images/Spade.png');
+  content: url('images/Spade.png');
 	background-size: contain;
 	background-repeat:no-repeat;
 	z-index: -1;	
@@ -63,6 +63,13 @@ div.hidden {
 	visibility: hidden;
 }
 
+.remove {
+	display: none;
+}
+
+.highlight {
+	box-shadow: 8px, 8px, 8px, #F8F405;
+}
 .cards-pile {
 	box-shadow: 10px 10px 5px #888888;
 }
@@ -122,5 +129,5 @@ div.hidden {
 }
 
 .pile {
-	
+
 }

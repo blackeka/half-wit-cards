@@ -1,5 +1,6 @@
 import React from 'react';
 import {makeDeck, shuffle, deal, drawCard, pickupPile} from '../helpers/deck.jsx';
+import $ from "jquery";
 
 class Game extends React.Component {
   constructor(props) {
@@ -18,10 +19,16 @@ class Game extends React.Component {
       p1dback: true,
       p1hand: [], 
       p1hback: false,
+      p1turn: false,
+      gameinit: false,
+      selected: [],
+      selectedRank: '',
       pile: []
     };
     this.dealClick = this.dealClick.bind(this);
     this.onDraw = this.onDraw.bind(this);
+    this.onselect = this.onselect.bind(this);
+    this.playClick = this.playClick.bind(this);
   }
   
   componentWillMount() {
@@ -56,7 +63,7 @@ class Game extends React.Component {
                 p1draw: deal(this.state.cards, 16),
                 // cards: this.state.cards.slice(0, 0)
               }, () => {
-                $('.btn-deal').toggleClass('hidden')
+                $('.btn-deal').addClass('remove');
               });
             })
           })
@@ -91,11 +98,49 @@ class Game extends React.Component {
         p1hand: hand,
         p1draw: draw,
         pile: hand
-      }, () => {
-        console.log(this.state.p1hand, 'should have 7')
       });
     }
 
+  }
+
+  onselect(e) {
+    //highlight what cards are selected
+    //game is is initialized selected card ranks must ===
+    let value = undefined;
+    $('div.p1hand').on('click', (e) => {      
+      console.log('how bout this', e.currentTarget.attributes)
+      value = JSON.parse(e.currentTarget.attributes.value.value);
+      console.log('here is the value', value)
+    })
+    // let id = e.target.id;
+    // if (this.state.gameinit) {
+    //   let temp = [];
+    //   if (this.state.selected.length === 0) {
+    //     temp.push(e.target.value)
+    //   } else if (e.target.value === selectedRank) {
+    //     for (let i = 0; i < this.state.selected.length; i++) {
+    //       let current = this.state.selected[i];
+    //       temp.push(current);
+    //       if (i === this.state.selected.length - 1) {
+    //         temp.push(e.target.value);
+    //       }
+    //     }
+    //   }
+    //   $(id).toggleClass('highlight');
+    //   this.setState({
+    //     selected: temp,
+    //     selectedRank: e.target.value.rank
+    //   }, () => {
+    //     console.log(this.state.selected)
+    //   })
+    // }
+    //else can only select 3
+  }
+
+  playClick() {
+    //save selected cards
+    //remove from p1hand
+    //add to pile
   }
 
   render() {
@@ -199,8 +244,8 @@ class Game extends React.Component {
           </div>
           <div className="player1-hand">
             {this.state.p1hand.length > 0 ? 
-                this.state.p1hand.map((card) => (
-                  <div className="card card-front ">
+                this.state.p1hand.map((card, i) => (
+                  <div className="card card-front p1hand" id={`${i}-${card.rank}-${card.suit}`} value={JSON.stringify(card)} onClick={this.onselect}>
                     <div className="rank">
                       <span>{card.rank}</span>
                       <div className="suit" id={card.suit}>
@@ -221,20 +266,3 @@ class Game extends React.Component {
 }
 
 export default Game;
-
-{/* 
-this.state.p1draw.map((card) => (
-                  <div className="card">
-                  <div className="card-back">
-                    <div className="rank hidden">
-                      <span>{card.rank}</span>
-                      <div className="suit" id={card.suit}>
-                        <div className={card.suit}>
-
-                        </div>
-                      </div>
-                      <span className="bottom-right">{card.rank}</span>
-                    </div>
-                  </div>  
-                </div>
-              )) : <div></div> */}
