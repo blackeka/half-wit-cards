@@ -23,12 +23,17 @@ class Game extends React.Component {
       gameinit: false,
       selected: [],
       selectedRank: '',
+      riverTop: [],
+      riverTnum: null,
       pile: []
     };
     this.dealClick = this.dealClick.bind(this);
     this.onDraw = this.onDraw.bind(this);
     this.onselect = this.onselect.bind(this);
     this.playClick = this.playClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.messageChange = this.messageChange.bind(this);
+    this.sendClick = this.sendClick.bind(this);
   }
   
   componentWillMount() {
@@ -76,6 +81,18 @@ class Game extends React.Component {
     $('.card-back').toggleClass('card-front')
   }
 
+  handleChange(e) {
+
+  } 
+
+  messageChange(e) {
+
+  }
+
+  sendClick() {
+
+  }
+
   onDraw(e) {
     var draw = []
     this.state.p1draw.map((card) => {
@@ -97,7 +114,6 @@ class Game extends React.Component {
       this.setState({
         p1hand: hand,
         p1draw: draw,
-        pile: hand
       });
     }
 
@@ -107,38 +123,96 @@ class Game extends React.Component {
     //highlight what cards are selected
     //game is is initialized selected card ranks must ===
     let value = undefined;
+    // let id = e.currentTarget;
     $('div.p1hand').on('click', (e) => {      
-      console.log('how bout this', e.currentTarget.attributes)
       value = JSON.parse(e.currentTarget.attributes.value.value);
-      console.log('here is the value', value)
+      // var temp = [];
+      // if (this.state.selected.length) {
+      //   console.log('if')
+      //   for (let i = 0; i < this.state.selected.length; i++) {
+      //     let current = JSON.stringify(this.state.selected[i]); 
+      //     temp.push(JSON.parse(current));
+      //     if (i === this.state.selected.length - 1) {
+      //       temp.push(value)
+      //     }
+      //   }
+      // } else {
+      //   console.log('else')
+      //   temp.push(value);
+      // }
+      // console.log(`here iss temp ${JSON.stringify(temp)} ${temp} and selected ${this.state.selected}`)
+      // console.log(`value here: ${JSON.stringify(value)}`)
+
+      if (this.state.gameinit) {
+        //if !selectedRank or rank === selectedRank
+        if (!this.state.selectedRank || value.rank === this.state.selectedRank) {
+          this.setState({
+            selectedRank: value.rank,
+            selected: value
+          }, () => {
+            console.log(`selectedRank: ${this.state.selectedRank}, selected: ${JSON.stringify(this.state.selected)}`)
+          });
+          $(e.currentTarget).toggleClass('highlight');
+        }
+      } else {
+        // if (temp.length <= 3) {
+          this.setState({
+            selected: JSON.stringify(value)
+          }, () => {
+            console.log(`what in the ${this.state.selected}`)
+          });
+          $(e.currentTarget).toggleClass('highlight');
+        // }
+      }
     })
-    // let id = e.target.id;
-    // if (this.state.gameinit) {
-    //   let temp = [];
-    //   if (this.state.selected.length === 0) {
-    //     temp.push(e.target.value)
-    //   } else if (e.target.value === selectedRank) {
-    //     for (let i = 0; i < this.state.selected.length; i++) {
-    //       let current = this.state.selected[i];
-    //       temp.push(current);
-    //       if (i === this.state.selected.length - 1) {
-    //         temp.push(e.target.value);
-    //       }
-    //     }
-    //   }
-    //   $(id).toggleClass('highlight');
-    //   this.setState({
-    //     selected: temp,
-    //     selectedRank: e.target.value.rank
-    //   }, () => {
-    //     console.log(this.state.selected)
-    //   })
-    // }
-    //else can only select 3
   }
 
   playClick() {
     //save selected cards
+    let remove = (this.state.selected);
+    let pile = [JSON.parse(remove)];
+    let temp = [];
+    let top = [];
+    if (this.state.riverTop.length) {
+      this.state.riverTop.map((card) => {
+        top.push(card)
+      })
+    }
+    top = top.concat(pile)
+    this.state.p1hand.map((card) => {
+      let tC = JSON.stringify(card) 
+      console.log(remove, card)
+      if (JSON.parse(remove).rank !== JSON.parse(tC).rank || JSON.parse(remove).suit !== JSON.parse(tC).suit) {
+        temp.push(card);
+      }
+    })
+    $('.highlight').toggleClass()
+    console.log(`here is new top ${top}`)
+    if (this.state.gameinit) {
+      this.setState({
+        //eventually will be an array of all
+        pile: pile,
+        p1hand: temp,
+        selected: []
+      }, () => {
+        console.log('pile is: ', pile)
+      })
+    } else if (this.state.riverTnum < 3) {
+      this.setState({
+        riverTop: top,
+        p1hand: temp,
+        selected: [],
+        riverTnum: this.state.riverTnum + 1
+      }, () => {
+        console.log(this.state.riverTnum)
+        if (this.state.riverTnum === 3) {
+          this.setState({
+            gameinit: true,
+            selected: []
+          })
+        }
+      })
+    }
     //remove from p1hand
     //add to pile
   }
@@ -217,6 +291,7 @@ class Game extends React.Component {
         </div>
         <div className="player1">
           <div className="player1-river">
+          <div className="river-bottom">
             {this.state.p1river.length > 0 ? 
                 this.state.p1river.map((card) => (
                   <div className="card">
@@ -234,6 +309,24 @@ class Game extends React.Component {
                 </div>
               )) : <div></div>
               }
+              </div> 
+              <div className="river-top">
+            {this.state.riverTop.length > 0 ? 
+              this.state.riverTop.map((card) => (
+                <div className="card card-front p1hand" id={`${card.rank}-${card.suit}`} value={JSON.stringify(card)} onClick={this.onselect}>
+                  <div className="rank">
+                    <span>{card.rank}</span>
+                    <div className="suit" id={card.suit}>
+                      <div className={card.suit}>
+
+                      </div>
+                    </div>
+                    <span className="bottom-right">{card.rank}</span>
+                  </div>
+                </div>
+              )) : <div></div>
+            }
+            </div>
           </div>
           <div className="player1-draw">
             {this.state.p1draw.length > 0 ? 
@@ -244,22 +337,35 @@ class Game extends React.Component {
           </div>
           <div className="player1-hand">
             {this.state.p1hand.length > 0 ? 
-                this.state.p1hand.map((card, i) => (
-                  <div className="card card-front p1hand" id={`${i}-${card.rank}-${card.suit}`} value={JSON.stringify(card)} onClick={this.onselect}>
-                    <div className="rank">
-                      <span>{card.rank}</span>
-                      <div className="suit" id={card.suit}>
-                        <div className={card.suit}>
+              this.state.p1hand.map((card) => (
+                <div className="card card-front p1hand" id={`${card.rank}-${card.suit}`} value={JSON.stringify(card)} onClick={this.onselect}>
+                  <div className="rank">
+                    <span>{card.rank}</span>
+                    <div className="suit" id={card.suit}>
+                      <div className={card.suit}>
 
-                        </div>
                       </div>
-                      <span className="bottom-right">{card.rank}</span>
                     </div>
+                    <span className="bottom-right">{card.rank}</span>
                   </div>
-                )) : <div></div>
-              }
+                </div>
+              )) : <div></div>
+            }
+            {this.state.selected.length > 0 ? 
+              <button onClick={this.playClick}>Play</button> : <div></div>
+            }
           </div>
         </div>
+        <div id="testing">
+          <div id="chat-window">
+            <div id="output"></div>
+            <div id="feedback"></div>
+          </div>
+          <input id="handle" type="text" placeholder="Handle" onChange={this.handleChange}/>
+          <input id="message" type="text" placeholder="Message" onChange={this.messageChange}/>
+          <button id="send" onClick={this.sendClick}>Send</button>
+        </div>
+         
       </div>
     );
   }

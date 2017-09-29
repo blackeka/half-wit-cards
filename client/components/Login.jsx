@@ -49,7 +49,7 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="modal-container">
+      <div className="login">
         <Form >
           <FormGroup controlId="name">
             <FormControl
