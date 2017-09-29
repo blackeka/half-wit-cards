@@ -1,5 +1,6 @@
 import React from 'react';
 import {makeDeck, shuffle} from '../helpers/deck.jsx';
+import Nav from './Nav.jsx';
 
 class Card extends React.Component {
   constructor(props) {
@@ -20,7 +21,8 @@ class Card extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.handleClick}>Show me the Money</button>
+        <Nav />
+        <button onClick={this.handleClick}>Shuffle</button>
         {
           this.state.cards ? 
           this.state.cards.map((card) => 

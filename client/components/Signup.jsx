@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
-import {Jumbotron, Button, Form, FormControl, FormGroup} from 'react-bootstrap';
+import { Redirect, Link } from 'react-router-dom';
+import {Navbar, Jumbotron, Button, Form, FormControl, FormGroup} from 'react-bootstrap';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -61,7 +61,14 @@ class Signup extends React.Component {
   render() {
     return(
       <div>
-        <Jumbotron>
+        <Navbar inverse collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/login"> Half-Wit Cards</Link>
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+        <Jumbotron className="login">
           <Form >
             <FormGroup controlId="name">
               <FormControl

@@ -24,32 +24,37 @@ span.bottom-right {
 	width: 90px;
 }
 
-.card.suit.Hearts {
-	background-image: url('images/Heart.png');
+.Hearts {
+	width: 100%;
+	height: 100%;
+	content: url('images/Heart.png');
 	background-size: contain;
 	background-repeat:no-repeat;
-	z-index: -1;
 }
 
-.card.suit.Diamonds {
-  background-image: url('images/Diamond.png');
+.Diamonds {
+	width: 100%;
+	height: 100%;
+  content: url('images/Diamond.png');
 	background-size: contain;
 	background-repeat:no-repeat;
-	z-index: -1;
 }
 
-.card.suit.Clubs {
+.Clubs {
+	width: 100%;
+	height: 100%;
 	content: url('images/Club.png');
 	background-size: contain;
 	background-repeat:no-repeat;
-	z-index: -1;
 }
 
-.card.suit.Spades {
-  content: url('images/Spade.png');
+.Spades {
+	width: 100%;
+	height: 100%;
+	background-image: url(images/Spade.png);
 	background-size: contain;
-	background-repeat:no-repeat;
-	z-index: -1;	
+	background-repeat: no-repeat;
+	z-index: 2;	
 }
 
 .card-back {
@@ -67,20 +72,29 @@ div.hidden {
 	display: none;
 }
 
-.highlight {
-	box-shadow: 8px, 8px, 8px, #F8F405;
-	border: solid 20px green;
+.pile {
+	float: both;
+	margin: 0 500px;
+	margin-top: 200px;
+	margin-bottom: 0px;
 }
+
+.highlight {
+	background-color: #9DEDFC;
+	box-shadow: 10px 10px 5px #D0F309;
+}
+
 .cards-pile {
 	box-shadow: 10px 10px 5px #888888;
 }
+
 .player2-river {
 	border: solid 2px #BCE40D;
 	border-radius: 12px;
 	float:left;
 	padding: 3px;
 	margin: 1px;
-	margin-right: 15px;
+	margin-right: 25px;
 }
 
 .player2-draw {
@@ -89,6 +103,7 @@ div.hidden {
 	float:left;
 	padding: 3px;
 	margin: 1px;
+	margin-right: 25px;
 }
 
 .player2-hand {
@@ -97,6 +112,8 @@ div.hidden {
 	float:left;
 	padding: 3px;
 	margin: 1px;
+	float: left;
+	margin-right: 40px;
 }
 
 .player1-river {
@@ -105,7 +122,7 @@ div.hidden {
 	float:left;
 	padding: 3px;
 	margin: 1px;
-	margin-right: 15px;
+	margin-right: 25px;
 }
 
 .player1-draw {
@@ -114,6 +131,7 @@ div.hidden {
 	float:left;
 	padding: 3px;
 	margin: 1px;
+	margin-right: 25px;
 }
 
 .player1-hand {
@@ -122,6 +140,7 @@ div.hidden {
 	float:left;
 	padding: 3px;
 	margin: 1px;
+	width: 650px;
 }
 
 .stats {
@@ -129,14 +148,24 @@ div.hidden {
 	width: 195px;
 }
 
-.pile {
-
-}
-
 body{
+	background: radial-gradient(#10D1F3, #4EDAF3, #0594F3);
 	font-family: 'Kaushan Script', cursive;
+	padding: 30px;
 }
 
+.navbar-inverse .navbar-brand {
+  font-weight: bolder;
+  color: #01C1FC
+}
+.navbar-inverse .navbar-nav>li>a {
+  font-weight: bolder;
+  color: #9AE7FF;
+}
+a {
+  font-weight: bolder;
+  color: #3DC8FF;
+}
 h2{
 	font-size: 18px;
 	padding: 10px 20px;
@@ -144,35 +173,12 @@ h2{
 }
 
 .login{
-	max-width: 600px;
-	margin: 30px auto;
-	border: 1px solid #ddd;
+	max-width: 400px;
+	margin: 350px auto;
+	/* border: 1px solid #ddd; */
 	box-shadow: 1px 3px 5px rgba(0,0,0,0.05);
 	border-radius: 2px;
-	float: both
-}
-
-#chat-window{
-	height: 400px;
-	overflow: auto;
-	background: #f9f9f9;
-}
-
-#output p{
-	padding: 14px 0px;
-	margin: 0 20px;
-	border-bottom: 1px solid #e9e9e9;
-	color: #555;
-}
-
-#feedback p{
-	color: #aaa;
-	padding: 14px 0px;
-	margin: 0 20px;
-}
-
-#output strong{
-	color: #575ed8;
+	float: both;
 }
 
 label{
@@ -202,4 +208,18 @@ button{
 	padding: 12px 0;
 	width: 100%;
 	border-radius: 2px;
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 20px;
+	display: inline-flex;
+}
+.navbar-right {
+	float: right;
+}
+.navbar-header {
+	display: inline-block;
+	position: relative;
 }

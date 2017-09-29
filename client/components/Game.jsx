@@ -1,6 +1,7 @@
 import React from 'react';
 import {makeDeck, shuffle, deal, drawCard, pickupPile} from '../helpers/deck.jsx';
 import $ from "jquery";
+import Nav from './Nav.jsx';
 // import {handleSend, handleTyping} from '../../public/socket.js';
 
 class Game extends React.Component {
@@ -163,14 +164,14 @@ class Game extends React.Component {
             selectedRank: value.rank,
             selected: JSON.stringify(value)
           });
-          $(e.currentTarget).toggleClass('highlight');
+          $(e.target).parent('div').toggleClass('highlight');
         // }
       } else {
         // if (temp.length <= 3) {
           this.setState({
             selected: JSON.stringify(value)
           });
-          $(e.currentTarget).toggleClass('highlight');
+          $(e.target).parent('div').toggleClass('highlight');
         // }
       }
     })
@@ -269,16 +270,17 @@ class Game extends React.Component {
   render() {
     return (
       <div>
+        <Nav />
         <div className="player2">
           <div className="player2-river">
             {this.state.p2river.length > 0 ? 
               this.state.p2river.map((card) => (
-                <div className="card" id="p2river" onClick={this.flip}>
+                <div className="card" onClick={this.flip}>
                   
                   <div className="card-back">
                     <div className="rank hidden">
                       <span>{card.rank}</span>
-                      <div className="suit" id={card.suit}>
+                      <div className="suit" >
                         <div className={card.suit}>
 
                         </div>
@@ -304,7 +306,7 @@ class Game extends React.Component {
                   <div className="card-back">
                     <div className="rank hidden">
                       <span>{card.rank}</span>
-                      <div className="suit" id={card.suit}>
+                      <div className="suit" >
                         <div className={card.suit}>
 
                         </div>
@@ -323,7 +325,7 @@ class Game extends React.Component {
               {this.state.pile ? 
                 <div className="card cards-pile" onClick={this.onPilePickUp}>
                   <span>{this.state.pile[this.state.pile.length - 1].rank}</span>  
-                  <div className="suit" id={this.state.pile[this.state.pile.length - 1].suit}>
+                  <div className="suit">
                     <div className={this.state.pile[this.state.pile.length - 1].suit}>
 
                     </div>
@@ -347,7 +349,7 @@ class Game extends React.Component {
                   <div className="card-back">
                     <div className="rank hidden">
                       <span>{card.rank}</span>
-                      <div className="suit" id={card.suit}>
+                      <div className="suit" >
                         <div className={card.suit}>
 
                         </div>
@@ -365,7 +367,7 @@ class Game extends React.Component {
                 <div className="card card-front p1hand" id={`${card.rank}-${card.suit}`} value={JSON.stringify(card)} onClick={this.onselect}>
                   <div className="rank">
                     <span>{card.rank}</span>
-                    <div className="suit" id={card.suit}>
+                    <div className="suit" >
                       <div className={card.suit}>
 
                       </div>
@@ -387,10 +389,10 @@ class Game extends React.Component {
           <div className="player1-hand">
             {this.state.p1hand.length > 0 ? 
               this.state.p1hand.map((card) => (
-                <div className="card card-front p1hand" id={`${card.rank}-${card.suit}`} value={JSON.stringify(card)} onClick={this.onselect}>
-                  <div className="rank">
+                <div className=" card-front p1hand" value={JSON.stringify(card)} onClick={this.onselect}>
+                  <div className="card rank">
                     <span>{card.rank}</span>
-                    <div className="suit" id={card.suit}>
+                    <div className="suit">
                       <div className={card.suit}>
 
                       </div>

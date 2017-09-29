@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, Redirect} from 'react-router-dom';
-import { Form, Button, FormControl, FormGroup } from 'react-bootstrap';
+import { Navbar, Form, Button, FormControl, FormGroup } from 'react-bootstrap';
 
 class Login extends React.Component {
   constructor(props) {
@@ -49,36 +49,45 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login">
-        <Form >
-          <FormGroup controlId="name">
-            <FormControl
-              type="text"
-              value={this.state.username}
-              placeholder="username"
-              onChange={this.usernameChange}
-            />
-            <FormControl.Feedback />
-          </FormGroup>
-          <FormGroup controlId="name">
-            <FormControl
-              type="password"
-              value={this.state.password}
-              placeholder="password"
-              onChange={this.passwordChange}
-            />
-            <FormControl.Feedback />
-          </FormGroup>
-        </Form>
-        <Link to="/signup">
-          <Button className="create-account" bsSize="lg" onClick={() => {<Redirect to="/signup" />}}>
-            New Account
+      <div>
+        <Navbar inverse collapseOnSelect>
+          <Navbar.Header>
+            <Navbar.Brand>
+              <Link to="/login"> Half-Wit Cards</Link>
+            </Navbar.Brand>
+          </Navbar.Header>
+        </Navbar>
+        <div className="login">
+          <Form >
+            <FormGroup controlId="name">
+              <FormControl
+                type="text"
+                value={this.state.username}
+                placeholder="username"
+                onChange={this.usernameChange}
+              />
+              <FormControl.Feedback />
+            </FormGroup>
+            <FormGroup controlId="name">
+              <FormControl
+                type="password"
+                value={this.state.password}
+                placeholder="password"
+                onChange={this.passwordChange}
+              />
+              <FormControl.Feedback />
+            </FormGroup>
+          </Form>
+          <Link to="/signup">
+            <Button className="create-account" bsSize="lg" onClick={() => {<Redirect to="/signup" />}}>
+              New Account
+            </Button>
+          </Link>
+          <Button bsSize="lg" onClick={this.onLogin}>
+            Login
           </Button>
-        </Link>
-        <Button bsSize="lg" onClick={this.onLogin}>
-          Login
-        </Button>
-        {this.state.loggedIn ? <Redirect to="/game" /> : <div></div>}
+          {this.state.loggedIn ? <Redirect to="/game" /> : <div></div>}
+        </div>
       </div>
     )
   }
