@@ -1,6 +1,7 @@
 import React from 'react';
 import {makeDeck, shuffle, deal, drawCard, pickupPile} from '../helpers/deck.jsx';
 import $ from "jquery";
+// import {handleSend, handleTyping} from '../../public/socket.js';
 
 class Game extends React.Component {
   constructor(props) {
@@ -21,11 +22,11 @@ class Game extends React.Component {
       p1hback: false,
       p1turn: false,
       gameinit: false,
-      selected: [],
+      selected: null,
       selectedRank: '',
       riverTop: [],
       riverTnum: null,
-      pile: []
+      pile: null
     };
     this.dealClick = this.dealClick.bind(this);
     this.onDraw = this.onDraw.bind(this);
@@ -34,6 +35,7 @@ class Game extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.messageChange = this.messageChange.bind(this);
     this.sendClick = this.sendClick.bind(this);
+    this.onPilePickUp = this.onPilePickUp.bind(this);
   }
   
   componentWillMount() {
@@ -86,11 +88,25 @@ class Game extends React.Component {
   } 
 
   messageChange(e) {
-
+    // handleTyping();
   }
 
   sendClick() {
+    // handleSend();
+  }
 
+  onPilePickUp(e) {
+    var hand = []
+    for (let i = 0; i < this.state.p1hand.length; i++) {
+      let current = this.state.p1hand[i];
+      hand.push(current);
+    }
+    hand = hand.concat(e.target.value);
+    console.log(`pile and hand ${hand}`)
+    this.setState({
+      p1hand: hand,
+      pile: null
+    });
   }
 
   onDraw(e) {
@@ -124,8 +140,9 @@ class Game extends React.Component {
     //game is is initialized selected card ranks must ===
     let value = undefined;
     // let id = e.currentTarget;
-    $('div.p1hand').on('click', (e) => {      
+    $('div.p1hand').on('click', (e) => {     
       value = JSON.parse(e.currentTarget.attributes.value.value);
+      console.log('in jquery click', value) 
       // var temp = [];
       // if (this.state.selected.length) {
       //   console.log('if')
@@ -145,15 +162,16 @@ class Game extends React.Component {
 
       if (this.state.gameinit) {
         //if !selectedRank or rank === selectedRank
-        if (!this.state.selectedRank || value.rank === this.state.selectedRank) {
+        // if (!this.state.selectedRank || value.rank === this.state.selectedRank) {
+          console.log('should be in here')
           this.setState({
             selectedRank: value.rank,
-            selected: value
+            selected: JSON.stringify(value)
           }, () => {
             console.log(`selectedRank: ${this.state.selectedRank}, selected: ${JSON.stringify(this.state.selected)}`)
           });
           $(e.currentTarget).toggleClass('highlight');
-        }
+        // }
       } else {
         // if (temp.length <= 3) {
           this.setState({
@@ -170,7 +188,14 @@ class Game extends React.Component {
   playClick() {
     //save selected cards
     let remove = (this.state.selected);
-    let pile = [JSON.parse(remove)];
+    let card = [JSON.parse(remove)]
+    let pile = [];
+    if (this.state.pile) {
+      this.state.pile.map((card) => {
+        pile.push(card)
+      })
+    }
+    
     let temp = [];
     let top = [];
     if (this.state.riverTop.length) {
@@ -178,7 +203,7 @@ class Game extends React.Component {
         top.push(card)
       })
     }
-    top = top.concat(pile)
+    top = top.concat(card)
     this.state.p1hand.map((card) => {
       let tC = JSON.stringify(card) 
       console.log(remove, card)
@@ -189,11 +214,12 @@ class Game extends React.Component {
     $('.highlight').toggleClass()
     console.log(`here is new top ${top}`)
     if (this.state.gameinit) {
+      pile = pile.concat(card);
       this.setState({
         //eventually will be an array of all
         pile: pile,
         p1hand: temp,
-        selected: []
+        selected: null
       }, () => {
         console.log('pile is: ', pile)
       })
@@ -201,14 +227,14 @@ class Game extends React.Component {
       this.setState({
         riverTop: top,
         p1hand: temp,
-        selected: [],
+        selected: null,
         riverTnum: this.state.riverTnum + 1
       }, () => {
         console.log(this.state.riverTnum)
         if (this.state.riverTnum === 3) {
           this.setState({
             gameinit: true,
-            selected: []
+            selected: null
           })
         }
       })
@@ -271,8 +297,8 @@ class Game extends React.Component {
         <div className="middle-board">
           <div className="pile">
             <div className="in-play">
-              {this.state.pile.length > 0 ? 
-                <div className="card cards-pile">
+              {this.state.pile ? 
+                <div className="card cards-pile" value={this.state.pile} onClick={this.onPilePickUp}>
                   <span>{this.state.pile[this.state.pile.length - 1].rank}</span>  
                   <div className="suit" id={this.state.pile[this.state.pile.length - 1].suit}>
                     <div className={this.state.pile[this.state.pile.length - 1].suit}>
@@ -351,21 +377,12 @@ class Game extends React.Component {
                 </div>
               )) : <div></div>
             }
-            {this.state.selected.length > 0 ? 
+            {this.state.selected ? 
               <button onClick={this.playClick}>Play</button> : <div></div>
             }
           </div>
         </div>
-        <div id="testing">
-          <div id="chat-window">
-            <div id="output"></div>
-            <div id="feedback"></div>
-          </div>
-          <input id="handle" type="text" placeholder="Handle" onChange={this.handleChange}/>
-          <input id="message" type="text" placeholder="Message" onChange={this.messageChange}/>
-          <button id="send" onClick={this.sendClick}>Send</button>
-        </div>
-         
+    
       </div>
     );
   }
