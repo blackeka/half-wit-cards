@@ -9,7 +9,10 @@ Start the development server with this command:
 ```
 npm start
 ```
-In a separate terminal tab ```webpack -w```
+In a separate terminal tab 
+```
+webpack -w
+```
  
 Setup
 ---
