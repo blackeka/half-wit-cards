@@ -117,7 +117,7 @@ class Game extends React.Component {
       return card;
     })
     
-    if (draw && this.state.p1hand.length) {
+    if (draw && this.state.p1hand.length < 3) {
       let card = draw[draw.length - 1];
       let hand = []
       for (let i = 0; i < this.state.p1hand.length; i++) {
@@ -205,12 +205,36 @@ class Game extends React.Component {
     if (this.state.gameinit) {
       pile = pile.concat(card);
       let currentPile = this.state.pile;
-      let rank = 0;
+      let topRank = 0;
       if (currentPile !== null) {
-        rank = currentPile[currentPile.length -1].rank;
+        topRank = currentPile[currentPile.length -1].rank;
       }
-      console.log(card.rank)
-      // if (rank < card.rank) {
+      console.log(card, 'hi')
+      let rank = card[0].rank;
+      if (rank.length > 2) {
+        rank === 'JACK' ? rank = 11 : 
+          rank === 'QUEEN' ? rank = 12 :
+            rank === 'KING' ? rank = 13 : rank = 14 
+      } else {
+        rank = Number(rank);
+      }
+      if (topRank.length > 2) {
+        topRank === 'JACK' ? topRank = 11 : 
+          topRank === 'QUEEN' ? topRank = 12 :
+            topRank === 'KING' ? topRank = 13 : topRank = 14 
+      } else {
+        topRank = Number(topRank);
+      }
+            
+      console.log (rank, topRank)
+      if (rank == 10) {
+        console.log('inside')
+        this.setState({
+          pile: null,
+          p1hand: temp,
+          selected: null
+        });
+      } else if (rank >= topRank || rank == 2) {
         this.setState({
           pile: pile,
           p1hand: temp,
@@ -218,7 +242,11 @@ class Game extends React.Component {
         }, () => {
           console.log('pile is: ', pile)
         })
-      // }
+      } else {
+        this.setState({
+          selected: null,
+        });
+      }
     } else if (this.state.riverTnum < 3) {
       this.setState({
         riverTop: top,
