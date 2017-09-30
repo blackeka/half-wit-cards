@@ -4,7 +4,7 @@
   "description": "Card game based on the original game of Idiot.",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "compile": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
