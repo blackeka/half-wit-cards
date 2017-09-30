@@ -12,7 +12,7 @@ const app = express();
 const compiler = webpack(webpackConfig);
 
 app.use(bodyParser.json())
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('/public'));
 app.use('/', routes);
 
 app.set('port', (process.env.PORT || 3000));

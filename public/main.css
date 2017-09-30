@@ -89,7 +89,7 @@ div.hidden {
 }
 
 .player2-river {
-	border: solid 2px #BCE40D;
+	/* border: solid 2px #BCE40D; */
 	border-radius: 12px;
 	float:left;
 	padding: 3px;
@@ -98,7 +98,7 @@ div.hidden {
 }
 
 .player2-draw {
-	border: solid 2px #340DE4;
+	/* border: solid 2px #340DE4; */
 	border-radius: 12px;
 	float:left;
 	padding: 3px;
@@ -107,7 +107,7 @@ div.hidden {
 }
 
 .player2-hand {
-	border: solid 2px #E44A0D;
+	/* border: solid 2px #E44A0D; */
 	border-radius: 12px;
 	float:left;
 	padding: 3px;
@@ -117,7 +117,7 @@ div.hidden {
 }
 
 .player1-river {
-	border: solid 2px #BCE40D;
+	/* border: solid 2px #BCE40D; */
 	border-radius: 12px;
 	float:left;
 	padding: 3px;
@@ -126,7 +126,7 @@ div.hidden {
 }
 
 .player1-draw {
-	border: solid 2px #340DE4;
+	/* border: solid 2px #340DE4; */
 	border-radius: 12px;
 	float:left;
 	padding: 3px;
@@ -135,7 +135,7 @@ div.hidden {
 }
 
 .player1-hand {
-	border: solid 2px #E44A0D;
+	/* border:heroku solid 2px #E44A0D; */
 	border-radius: 12px;
 	float:left;
 	padding: 3px;
