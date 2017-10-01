@@ -27,7 +27,8 @@ class Game extends React.Component {
       selectedRankSuit: '',
       riverTop: [],
       riverTnum: null,
-      pile: null
+      pile: null,
+      win: false
     };
     this.dealClick = this.dealClick.bind(this);
     this.onDraw = this.onDraw.bind(this);
@@ -258,6 +259,13 @@ class Game extends React.Component {
           selected: null,
           riverTop: riverTop,
           p1river: riverBottom
+        }, () => {
+          this.state.p1draw.length === 0 && this.state.p1hand.length === 0 && this.state.p1river.length === 0 ? 
+            this.setState({
+              win: true
+            }) : this.setState({
+              win: false
+            })
         })
       } else {
         this.setState({
@@ -302,6 +310,11 @@ class Game extends React.Component {
         <div className="middle-board">
           <div className="pile">
             <Pile pile={this.state.pile} pickUp={this.onPilePickUp} />
+          </div>
+          <div className="win">
+            { this.state.win ? 
+              <h1> CONGRATULATIONS! YOU WIN! </h1> : <div></div>
+            }
           </div>
           <div className="stats"></div>
           <div className="buttons">

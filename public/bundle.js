@@ -57609,7 +57609,8 @@ var Game = function (_React$Component) {
       selectedRankSuit: '',
       riverTop: [],
       riverTnum: null,
-      pile: null
+      pile: null,
+      win: false
     };
     _this.dealClick = _this.dealClick.bind(_this);
     _this.onDraw = _this.onDraw.bind(_this);
@@ -57849,6 +57850,12 @@ var Game = function (_React$Component) {
             selected: null,
             riverTop: riverTop,
             p1river: riverBottom
+          }, function () {
+            _this3.state.p1draw.length === 0 && _this3.state.p1hand.length === 0 && _this3.state.p1river.length === 0 ? _this3.setState({
+              win: true
+            }) : _this3.setState({
+              win: false
+            });
           });
         } else {
           this.setState({
@@ -57904,6 +57911,15 @@ var Game = function (_React$Component) {
             'div',
             { className: 'pile' },
             _react2.default.createElement(_Pile2.default, { pile: this.state.pile, pickUp: this.onPilePickUp })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'win' },
+            this.state.win ? _react2.default.createElement(
+              'h1',
+              null,
+              ' CONGRATULATIONS! YOU WIN! '
+            ) : _react2.default.createElement('div', null)
           ),
           _react2.default.createElement('div', { className: 'stats' }),
           _react2.default.createElement(
