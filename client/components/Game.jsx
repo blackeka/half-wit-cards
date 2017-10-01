@@ -80,10 +80,6 @@ class Game extends React.Component {
     }) 
   }
 
-  flip() {
-    $('.card-back').toggleClass('card-front')
-  }
-
   handleChange(e) {
 
   } 
@@ -99,7 +95,6 @@ class Game extends React.Component {
   onPilePickUp(e) {
     let hand = [];
     let pile = this.state.pile;
-    console.log('pileeee', pile)
     for (let i = 0; i < this.state.p1hand.length; i++) {
       let current = this.state.p1hand[i];
       hand.push(current);
@@ -112,7 +107,7 @@ class Game extends React.Component {
   }
 
   onDraw(e) {
-    var draw = []
+    let draw = []
     this.state.p1draw.map((card) => {
       draw.push(card)
       return card;
@@ -141,11 +136,9 @@ class Game extends React.Component {
     //game is is initialized selected card ranks must ===
     let value = undefined;
     // let id = e.currentTarget;
-    // console.log(e, 'e is here')
     // $('div.p1hand').on('click', (e) => {     
       value = JSON.parse(e.currentTarget.attributes.value.value);
-      console.log(value)
-      // var temp = [];
+      // let temp = [];
       // if (this.state.selected.length) {
       //   for (let i = 0; i < this.state.selected.length; i++) {
       //     let current = JSON.stringify(this.state.selected[i]); 
@@ -165,8 +158,6 @@ class Game extends React.Component {
           this.setState({
             selectedRankSuit: (value.rank + ' of ' + value.suit),
             selected: JSON.stringify(value)
-          }, () => {
-            console.log(this.state.selectedRankSuit, 'shoot')
           });
         // }
       } else {
@@ -189,9 +180,7 @@ class Game extends React.Component {
       this.state.pile.map((card) => {
         pile.push(card)
       })
-    }
-    
-    let temp = [];
+    }  
     let top = [];
     if (this.state.riverTop.length) {
       this.state.riverTop.map((card) => {
@@ -199,13 +188,20 @@ class Game extends React.Component {
       })
     }
     top = top.concat(card)
+    let temp = [];
     this.state.p1hand.map((card) => {
       let tC = JSON.stringify(card) 
       if (JSON.parse(remove).rank !== JSON.parse(tC).rank || JSON.parse(remove).suit !== JSON.parse(tC).suit) {
         temp.push(card);
       }
     })
-    $('.highlight').toggleClass()
+    let riverTop = [];
+    this.state.riverTop.map((card) => {
+      let tC = JSON.stringify(card) 
+      if (JSON.parse(remove).rank !== JSON.parse(tC).rank || JSON.parse(remove).suit !== JSON.parse(tC).suit) {
+        riverTop.push(card);
+      }
+    })
     if (this.state.gameinit) {
       pile = pile.concat(card);
       let currentPile = this.state.pile;
@@ -213,7 +209,6 @@ class Game extends React.Component {
       if (currentPile !== null) {
         topRank = currentPile[currentPile.length -1].rank;
       }
-      console.log(card, 'hi')
       let rank = card[0].rank;
       if (rank.length > 2) {
         rank === 'JACK' ? rank = 11 : 
@@ -229,22 +224,20 @@ class Game extends React.Component {
       } else {
         topRank = Number(topRank);
       }
-            
-      console.log (rank, topRank)
+
       if (rank == 10) {
-        console.log('inside')
         this.setState({
           pile: null,
           p1hand: temp,
-          selected: null
+          selected: null,
+          riverTop: riverTop
         });
       } else if (rank >= topRank || rank == 2) {
         this.setState({
           pile: pile,
           p1hand: temp,
-          selected: null
-        }, () => {
-          console.log('pile is: ', pile)
+          selected: null,
+          riverTop: riverTop
         })
       } else {
         this.setState({
@@ -266,8 +259,6 @@ class Game extends React.Component {
         }
       })
     }
-    //remove from p1hand
-    //add to pile
   }
 
   render() {
@@ -299,11 +290,11 @@ class Game extends React.Component {
         </div>
         <div className="player1">
           <div className="player1-river">
-          <div className="river-bottom">
-            <RiverBottom p1river={this.state.p1river} select={this.onselect}/>
+            <div className="river-bottom">
+              <RiverBottom p1river={this.state.p1river} select={this.onselect}/>
             </div> 
             <div className="river-top">
-                <RiverTop riverTop={this.state.riverTop} select={this.onselect}/>
+              <RiverTop riverTop={this.state.riverTop} select={this.onselect}/>
             </div>
           </div>
           <div className="player1-draw">
