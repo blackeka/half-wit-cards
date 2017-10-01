@@ -2,7 +2,12 @@ import React from 'react';
 import {makeDeck, shuffle, deal, drawCard, pickupPile} from '../helpers/deck.jsx';
 import $ from "jquery";
 import Nav from './Nav.jsx';
-import Hand from './Hand.jsx';
+import Hand1 from './Hand1.jsx';
+import Hand2 from './Hand2.jsx';
+import RiverTop from './RiverTop.jsx';
+import RiverBottom from './RiverBottom.jsx';
+import Pile from './Pile.jsx';
+import River2 from './River2.jsx';
 // import {handleSend, handleTyping} from '../../public/socket.js';
 
 class Game extends React.Component {
@@ -11,17 +16,11 @@ class Game extends React.Component {
     this.state = {
       cards: [],
       p2river: [],
-      p2rback: true,
       p2draw: [],
-      p2dback: true,
       p2hand: [],
-      p2hback: true,
       p1river: [],
-      p1rback: true,
       p1draw: [],
-      p1dback: true,
       p1hand: [], 
-      p1hback: false,
       p1turn: false,
       gameinit: false,
       selected: null,
@@ -277,67 +276,21 @@ class Game extends React.Component {
         <Nav />
         <div className="player2">
           <div className="player2-river">
-            {this.state.p2river.length > 0 ? 
-              this.state.p2river.map((card) => (
-                <div className="card" onClick={this.flip}>
-                  
-                  <div className="card-back">
-                    <div className="rank hidden">
-                      <span>{card.rank}</span>
-                      <div className="suit" >
-                        <div className={card.suit}>
-
-                        </div>
-                      </div>
-                      <span className="bottom-right">{card.rank}</span>
-                    </div>
-                  </div>
-                </div>
-              )) : <div></div>
-            }
+            <River2 p2river={this.state.p2river} />
           </div>
           <div className="player2-draw">
             {this.state.p2draw.length > 0 ? 
-              <div className="card cards-pile card-back" id="p2" >
-                
+              <div className="card cards-pile card-back" id="p2" >  
               </div> : <div></div>
-              }
+            }
           </div>
           <div className="player2-hand">
-            {this.state.p2hand.length > 0 ? 
-                this.state.p2hand.map((card) => (
-                  <div className="card">
-                  <div className="card-back">
-                    <div className="rank hidden">
-                      <span>{card.rank}</span>
-                      <div className="suit" >
-                        <div className={card.suit}>
-
-                        </div>
-                      </div>
-                      <span className="bottom-right">{card.rank}</span>
-                    </div>
-                  </div>  
-                </div>
-              )) : <div></div>
-              }
+            <Hand2 p2hand={this.state.p2hand} />
           </div>
         </div>
         <div className="middle-board">
           <div className="pile">
-            <div className="in-play" data={this.state.pile}>
-              {this.state.pile ? 
-                <div className="card cards-pile" onClick={this.onPilePickUp}>
-                  <span>{this.state.pile[this.state.pile.length - 1].rank}</span>  
-                  <div className="suit">
-                    <div className={this.state.pile[this.state.pile.length - 1].suit}>
-
-                    </div>
-                  </div>
-                  <span className="bottom-right">{this.state.pile[this.state.pile.length - 1].rank}</span>
-                </div> : <div></div>
-              }
-             </div>
+            <Pile pile={this.state.pile} pickUp={this.onPilePickUp} />
           </div>
           <div className="stats"></div>
           <div className="buttons">
@@ -347,40 +300,10 @@ class Game extends React.Component {
         <div className="player1">
           <div className="player1-river">
           <div className="river-bottom">
-            {this.state.p1river.length > 0 ? 
-                this.state.p1river.map((card) => (
-                  <div className="card">
-                  <div className="card-back">
-                    <div className="rank hidden">
-                      <span>{card.rank}</span>
-                      <div className="suit" >
-                        <div className={card.suit}>
-
-                        </div>
-                      </div>
-                      <span className="bottom-right">{card.rank}</span>
-                    </div>
-                  </div>  
-                </div>
-              )) : <div></div>
-              }
-              </div> 
-              <div className="river-top">
-            {this.state.riverTop.length > 0 ? 
-              this.state.riverTop.map((card) => (
-                <div className="card card-front p1hand" id={`${card.rank}-${card.suit}`} value={JSON.stringify(card)} onClick={this.onselect}>
-                  <div className="rank">
-                    <span>{card.rank}</span>
-                    <div className="suit" >
-                      <div className={card.suit}>
-
-                      </div>
-                    </div>
-                    <span className="bottom-right">{card.rank}</span>
-                  </div>
-                </div>
-              )) : <div></div>
-            }
+            <RiverBottom p1river={this.state.p1river} select={this.onselect}/>
+            </div> 
+            <div className="river-top">
+                <RiverTop riverTop={this.state.riverTop} select={this.onselect}/>
             </div>
           </div>
           <div className="player1-draw">
@@ -391,9 +314,9 @@ class Game extends React.Component {
               }
           </div>
           <div className="player1-hand">
-            <Hand p1hand={this.state.p1hand} selected={this.state.selected} select={this.onselect} />
+            <Hand1 p1hand={this.state.p1hand} selected={this.state.selected} select={this.onselect} />
             {this.state.selected ? 
-              <button onClick={this.playClick}>Play --- {this.state.selectedRankSuit}</button> : <div></div>
+              <button  onClick={this.playClick}>Play --- {this.state.selectedRankSuit}</button> : <div></div>
             }
           </div>
         </div>
