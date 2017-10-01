@@ -5,12 +5,15 @@ class Hand extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedVal: ''
+      selected: true
     }
     this.selects = this.selects.bind(this);
   }
 
   selects(e, card) {
+    this.setState({
+      selected: !this.state.selected
+    })
     this.props.select(e)
   }
 
@@ -19,7 +22,8 @@ class Hand extends React.Component {
       <div>
       {
         this.props.p1hand.length > 0 ? 
-          this.props.p1hand.map((card) => (
+        <div>
+          {this.props.p1hand.map((card) => (
             <div  className="card p1hand"  key={card.rank + card.suit + ((Math.random() * 50) + 1)} value={JSON.stringify(card)} onClick={(e) => this.selects(e)} >
               <div className="rank" key={card.rank + card.suit + ((Math.random() * 100) + 51)}>
                 <span>{card.rank}</span>
@@ -31,7 +35,8 @@ class Hand extends React.Component {
                 <span className="bottom-right">{card.rank}</span>
               </div>
             </div>
-          )) : <div></div>
+          ))}
+          </div> : <div></div>
         }
       </div>
     )

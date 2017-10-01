@@ -96,12 +96,13 @@ div.hidden {
 	padding: 3px;
 	margin: 1px;
 	margin-right: 25px;
+	margin-left: 8%;
 }
 
 .player2-draw {
 	/* border: solid 2px #340DE4; */
 	border-radius: 12px;
-	float:left;
+	float: left;
 	padding: 3px;
 	margin: 1px;
 	margin-right: 25px;
@@ -110,7 +111,6 @@ div.hidden {
 .player2-hand {
 	/* border: solid 2px #E44A0D; */
 	border-radius: 12px;
-	float:left;
 	padding: 3px;
 	margin: 1px;
 	float: left;
@@ -120,16 +120,17 @@ div.hidden {
 .player1-river {
 	/* border: solid 2px #BCE40D; */
 	border-radius: 12px;
-	float:left;
+	float: left;
 	padding: 3px;
 	margin: 1px;
 	margin-right: 25px;
+	margin-left: 8%;
 }
 
 .player1-draw {
 	/* border: solid 2px #340DE4; */
 	border-radius: 12px;
-	float:left;
+	float: left;
 	padding: 3px;
 	margin: 1px;
 	margin-right: 25px;
@@ -139,7 +140,7 @@ div.hidden {
 .player1-hand {
 	/* border:heroku solid 2px #E44A0D; */
 	border-radius: 12px;
-	float:left;
+	float: left;
 	padding: 3px;
 	margin: 1px;
 	position: relative;
@@ -155,7 +156,6 @@ div.hidden {
 
 .river-bottom {
 	position: relative;
-
 }
 
 .stats {
@@ -173,14 +173,17 @@ body{
   font-weight: bolder;
   color: #01C1FC
 }
+
 .navbar-inverse .navbar-nav>li>a {
   font-weight: bolder;
   color: #9AE7FF;
 }
+
 a {
   font-weight: bolder;
   color: #3DC8FF;
 }
+
 h2{
 	font-size: 18px;
 	padding: 10px 20px;
@@ -202,7 +205,7 @@ label{
 	padding: 10px 20px;
 }
 
-input{
+input {
 	padding: 10px 20px;
 	box-sizing: border-box;
 	background: #eee;
@@ -215,16 +218,22 @@ input{
 	font-size: 16px;
 }
 
-button{
+button {
 	background: #FAEB1D;
 	color: #046BF1;
 	font-size: 22px;
 	font-weight: bolder;
 	border: 0;
 	padding: 12px 0;
-	width: 80%;
+	width: 100%;
 	border-radius: 10px;
 	font-family: 'Kaushan Script', cursive;
+}
+
+.play-btn {
+	width: 30%;
+	margin: 20px 30%;
+	float: both;
 }
 
 ul {

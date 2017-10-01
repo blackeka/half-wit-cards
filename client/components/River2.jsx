@@ -5,8 +5,7 @@ function River2(props) {
     <div>
       {props.p2river.length > 0 ? 
         props.p2river.map((card) => (
-          <div className="card">
-            
+          <div  key={card.rank + card.suit + ((Math.random() * 50) + 1)} className="card">          
             <div className="card-back">
               <div className="rank hidden">
                 <span>{card.rank}</span>

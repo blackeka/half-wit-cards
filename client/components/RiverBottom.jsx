@@ -5,7 +5,7 @@ function RiverBottom(props) {
     <div>
       {props.p1river.length > 0 ? 
           props.p1river.map((card) => (
-            <div className="card" onClick={props.select}>
+            <div  key={card.rank + card.suit + ((Math.random() * 50) + 1)} className="card" value={JSON.stringify(card)} onClick={(e) => props.select(e, "hide")}>
             <div className="card-back">
               <div className="rank hidden">
                 <span>{card.rank}</span>

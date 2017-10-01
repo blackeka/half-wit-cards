@@ -131,12 +131,14 @@ class Game extends React.Component {
     }
   }
 
-  onselect(e) {
+  onselect(e, show) {
     //highlight what cards are selected
     //game is is initialized selected card ranks must ===
     let value = undefined;
     // let id = e.currentTarget;
-    // $('div.p1hand').on('click', (e) => {     
+    // $('div.p1hand').on('click', (e) => {   
+      show = show || true;  
+      console.log(show)
       value = JSON.parse(e.currentTarget.attributes.value.value);
       // let temp = [];
       // if (this.state.selected.length) {
@@ -155,17 +157,29 @@ class Game extends React.Component {
       if (this.state.gameinit) {
         //if !selectedRank or rank === selectedRank
         // if (!this.state.selectedRank || value.rank === this.state.selectedRank) {   
-          this.setState({
-            selectedRankSuit: (value.rank + ' of ' + value.suit),
-            selected: JSON.stringify(value)
+          this.setState({    
+            selected: JSON.stringify(value),
+            selectedRankSuit: ''
           });
+          if (show !== "hide") {
+            console.log('2nd', show)
+            this.setState({
+              selectedRankSuit: ('  ---  ' + value.rank + ' of ' + value.suit),
+            });
+          }
         // }
       } else {
         // if (temp.length <= 3) {
           this.setState({
-            selectedRankSuit: (value.rank + ' of ' + value.suit),
+            selectedRankSuit: '',
             selected: JSON.stringify(value)
           });
+          if (show !== "hide") {
+            console.log('2nd', show)
+            this.setState({
+              selectedRankSuit: ('  ---  ' + value.rank + ' of ' + value.suit),
+            });
+          }
         // }
       }
     // })
@@ -202,6 +216,13 @@ class Game extends React.Component {
         riverTop.push(card);
       }
     })
+    let riverBottom = [];
+    this.state.p1river.map((card) => {
+      let tC = JSON.stringify(card) 
+      if (JSON.parse(remove).rank !== JSON.parse(tC).rank || JSON.parse(remove).suit !== JSON.parse(tC).suit) {
+        riverBottom.push(card);
+      }
+    })
     if (this.state.gameinit) {
       pile = pile.concat(card);
       let currentPile = this.state.pile;
@@ -230,14 +251,16 @@ class Game extends React.Component {
           pile: null,
           p1hand: temp,
           selected: null,
-          riverTop: riverTop
+          riverTop: riverTop,
+          p1river: riverBottom
         });
       } else if (rank >= topRank || rank == 2) {
         this.setState({
           pile: pile,
           p1hand: temp,
           selected: null,
-          riverTop: riverTop
+          riverTop: riverTop,
+          p1river: riverBottom
         })
       } else {
         this.setState({
@@ -294,7 +317,7 @@ class Game extends React.Component {
               <RiverBottom p1river={this.state.p1river} select={this.onselect}/>
             </div> 
             <div className="river-top">
-              <RiverTop riverTop={this.state.riverTop} select={this.onselect}/>
+              <RiverTop riverTop={this.state.riverTop} select={this.onselect} />
             </div>
           </div>
           <div className="player1-draw">
@@ -305,9 +328,11 @@ class Game extends React.Component {
               }
           </div>
           <div className="player1-hand">
-            <Hand1 p1hand={this.state.p1hand} selected={this.state.selected} select={this.onselect} />
+            <Hand1 p1hand={this.state.p1hand} select={this.onselect} />
+          </div>
+          <div className="play-btn">
             {this.state.selected ? 
-              <button  onClick={this.playClick}>Play --- {this.state.selectedRankSuit}</button> : <div></div>
+              <button  onClick={this.playClick}>Play{this.state.selectedRankSuit}</button> : <div></div>
             }
           </div>
         </div>
