@@ -38,7 +38,7 @@ socket.on('chat', function(data){
 socket.on('typing', (data) => {
   feedback.innerHTML = '<p><em>' + data + 'is typing a message...</em></p>';
 })
-<div id="testing">
+{/* <div id="testing">
           <div id="chat-window">
             <div id="output"></div>
             <div id="feedback"></div>
@@ -47,4 +47,4 @@ socket.on('typing', (data) => {
           <input id="message" type="text" placeholder="Message" onChange={this.messageChange}/>
           <button id="send" onClick={this.sendClick}>Send</button>
         </div>
-         
+          */}

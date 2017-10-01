@@ -2,6 +2,7 @@ import React from 'react';
 import {makeDeck, shuffle, deal, drawCard, pickupPile} from '../helpers/deck.jsx';
 import $ from "jquery";
 import Nav from './Nav.jsx';
+import Hand from './Hand.jsx';
 // import {handleSend, handleTyping} from '../../public/socket.js';
 
 class Game extends React.Component {
@@ -24,7 +25,7 @@ class Game extends React.Component {
       p1turn: false,
       gameinit: false,
       selected: null,
-      selectedRank: '',
+      selectedRankSuit: '',
       riverTop: [],
       riverTnum: null,
       pile: null
@@ -134,7 +135,6 @@ class Game extends React.Component {
         p1draw: draw,
       });
     }
-
   }
 
   onselect(e) {
@@ -142,8 +142,10 @@ class Game extends React.Component {
     //game is is initialized selected card ranks must ===
     let value = undefined;
     // let id = e.currentTarget;
-    $('div.p1hand').on('click', (e) => {     
+    // console.log(e, 'e is here')
+    // $('div.p1hand').on('click', (e) => {     
       value = JSON.parse(e.currentTarget.attributes.value.value);
+      console.log(value)
       // var temp = [];
       // if (this.state.selected.length) {
       //   for (let i = 0; i < this.state.selected.length; i++) {
@@ -156,25 +158,27 @@ class Game extends React.Component {
       // } else {
       //   temp.push(value);
       // }
-      
+      // let target = e.target;
+      e.preventDefault();
       if (this.state.gameinit) {
         //if !selectedRank or rank === selectedRank
-        // if (!this.state.selectedRank || value.rank === this.state.selectedRank) {
+        // if (!this.state.selectedRank || value.rank === this.state.selectedRank) {   
           this.setState({
-            selectedRank: value.rank,
+            selectedRankSuit: (value.rank + ' of ' + value.suit),
             selected: JSON.stringify(value)
+          }, () => {
+            console.log(this.state.selectedRankSuit, 'shoot')
           });
-          $(e.target).parent('div').toggleClass('highlight');
         // }
       } else {
         // if (temp.length <= 3) {
           this.setState({
+            selectedRankSuit: (value.rank + ' of ' + value.suit),
             selected: JSON.stringify(value)
           });
-          $(e.target).parent('div').toggleClass('highlight');
         // }
       }
-    })
+    // })
   }
 
   playClick() {
@@ -387,23 +391,9 @@ class Game extends React.Component {
               }
           </div>
           <div className="player1-hand">
-            {this.state.p1hand.length > 0 ? 
-              this.state.p1hand.map((card) => (
-                <div className=" card-front p1hand" value={JSON.stringify(card)} onClick={this.onselect}>
-                  <div className="card rank">
-                    <span>{card.rank}</span>
-                    <div className="suit">
-                      <div className={card.suit}>
-
-                      </div>
-                    </div>
-                    <span className="bottom-right">{card.rank}</span>
-                  </div>
-                </div>
-              )) : <div></div>
-            }
+            <Hand p1hand={this.state.p1hand} selected={this.state.selected} select={this.onselect} />
             {this.state.selected ? 
-              <button onClick={this.playClick}>Play</button> : <div></div>
+              <button onClick={this.playClick}>Play --- {this.state.selectedRankSuit}</button> : <div></div>
             }
           </div>
         </div>

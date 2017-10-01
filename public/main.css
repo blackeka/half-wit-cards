@@ -80,8 +80,9 @@ div.hidden {
 }
 
 .highlight {
-	background-color: #9DEDFC;
-	box-shadow: 10px 10px 5px #D0F309;
+	/* background-color: #9DEDFC; */
+	/* box-shadow: 20px 20px -200px -200px #ffe100; */
+	border: 10px outset #ffe100;
 }
 
 .cards-pile {
@@ -140,7 +141,7 @@ div.hidden {
 	float:left;
 	padding: 3px;
 	margin: 1px;
-	width: 650px;
+	/* width: 650px; */
 }
 
 .stats {
@@ -203,11 +204,13 @@ input{
 button{
 	background: #FAEB1D;
 	color: #046BF1;
-	font-size: 18px;
+	font-size: 22px;
+	font-weight: bolder;
 	border: 0;
 	padding: 12px 0;
-	width: 100%;
+	width: 80%;
 	border-radius: 2px;
+	font-family: 'Kaushan Script', cursive;
 }
 
 ul {
