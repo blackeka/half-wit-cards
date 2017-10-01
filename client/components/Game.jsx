@@ -311,9 +311,11 @@ class Game extends React.Component {
           <div className="pile">
             <Pile pile={this.state.pile} pickUp={this.onPilePickUp} />
           </div>
-          <div className="win">
+          <div>
             { this.state.win ? 
-              <h1> CONGRATULATIONS! YOU WIN! </h1> : <div></div>
+              <div className="win">
+                <h1> CONGRATULATIONS! YOU WIN! </h1> 
+              </div> : <div></div>
             }
           </div>
           <div className="stats"></div>

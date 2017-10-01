@@ -57914,11 +57914,15 @@ var Game = function (_React$Component) {
           ),
           _react2.default.createElement(
             'div',
-            { className: 'win' },
+            null,
             this.state.win ? _react2.default.createElement(
-              'h1',
-              null,
-              ' CONGRATULATIONS! YOU WIN! '
+              'div',
+              { className: 'win' },
+              _react2.default.createElement(
+                'h1',
+                null,
+                ' CONGRATULATIONS! YOU WIN! '
+              )
             ) : _react2.default.createElement('div', null)
           ),
           _react2.default.createElement('div', { className: 'stats' }),
