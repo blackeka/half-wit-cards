@@ -138,7 +138,6 @@ class Game extends React.Component {
     // let id = e.currentTarget;
     // $('div.p1hand').on('click', (e) => {   
       show = show || true;  
-      console.log(show)
       value = JSON.parse(e.currentTarget.attributes.value.value);
       // let temp = [];
       // if (this.state.selected.length) {
@@ -162,7 +161,6 @@ class Game extends React.Component {
             selectedRankSuit: ''
           });
           if (show !== "hide") {
-            console.log('2nd', show)
             this.setState({
               selectedRankSuit: ('  ---  ' + value.rank + ' of ' + value.suit),
             });
@@ -175,7 +173,6 @@ class Game extends React.Component {
             selected: JSON.stringify(value)
           });
           if (show !== "hide") {
-            console.log('2nd', show)
             this.setState({
               selectedRankSuit: ('  ---  ' + value.rank + ' of ' + value.suit),
             });
