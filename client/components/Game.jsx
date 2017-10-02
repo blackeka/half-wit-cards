@@ -1,5 +1,5 @@
 import React from 'react';
-import {makeDeck, shuffle, deal, drawCard, pickupPile} from '../helpers/deck.jsx';
+import {makeDeck, shuffle, deal, drawCard, pickupPile, chooseCard} from '../helpers/deck.jsx';
 import $ from "jquery";
 import Nav from './Nav.jsx';
 import Hand1 from './Hand1.jsx';
@@ -8,6 +8,7 @@ import RiverTop from './RiverTop.jsx';
 import RiverBottom from './RiverBottom.jsx';
 import Pile from './Pile.jsx';
 import River2 from './River2.jsx';
+import River2Top from './River2Top.jsx';
 // import {handleSend, handleTyping} from '../../public/socket.js';
 
 class Game extends React.Component {
@@ -26,6 +27,7 @@ class Game extends React.Component {
       selected: null,
       selectedRankSuit: '',
       riverTop: [],
+      river2Top: [],
       riverTnum: null,
       pile: null,
       win: false
@@ -283,6 +285,13 @@ class Game extends React.Component {
           this.setState({
             gameinit: true,
             selected: null
+          }, () => {
+            //cut three from player 2's hand 
+            // let riv2top = deal(this.state.p2hand, 3);
+            // console.log(deal(this.state.p2hand, 3), 'what')
+            this.setState({
+              river2Top: deal(this.state.p2hand, 3),
+            })
           })
         }
       })
@@ -295,7 +304,12 @@ class Game extends React.Component {
         <Nav />
         <div className="player2">
           <div className="player2-river">
-            <River2 p2river={this.state.p2river} />
+            <div className="river-bottom">
+              <River2 p2river={this.state.p2river} />
+            </div> 
+            <div className="river-top">
+              <River2Top river2Top={this.state.river2Top} select={this.onselect} />
+            </div>
           </div>
           <div className="player2-draw">
             {this.state.p2draw.length > 0 ? 

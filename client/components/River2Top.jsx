@@ -1,11 +1,11 @@
 import React from 'react';
 
-function RiverTop(props) {
+function River2Top(props) {
   return (
     <div>
-      {props.riverTop.length > 0 ? 
-        props.riverTop.map((card) => (
-          <div  key={card.rank + card.suit + ((Math.random() * 50) + 1)} className="card p1hand" value={JSON.stringify(card)} onClick={(e) => props.select(e)}>
+      {props.river2Top.length > 0 ? 
+        props.river2Top.map((card) => (
+          <div  key={card.rank + card.suit + ((Math.random() * 50) + 1)} className="card p2hand" value={JSON.stringify(card)} onClick={(e) => props.select(e)}>
             <div className="rank">
               <span>{card.rank}</span>
               <div className="suit" >
@@ -22,4 +22,4 @@ function RiverTop(props) {
   )
 };
 
-export default RiverTop;
+export default River2Top;

@@ -45172,7 +45172,7 @@ var _Game = __webpack_require__(518);
 
 var _Game2 = _interopRequireDefault(_Game);
 
-var _Deal = __webpack_require__(525);
+var _Deal = __webpack_require__(526);
 
 var _Deal2 = _interopRequireDefault(_Deal);
 
@@ -57598,6 +57598,10 @@ var _River = __webpack_require__(524);
 
 var _River2 = _interopRequireDefault(_River);
 
+var _River2Top = __webpack_require__(525);
+
+var _River2Top2 = _interopRequireDefault(_River2Top);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57629,6 +57633,7 @@ var Game = function (_React$Component) {
       selected: null,
       selectedRankSuit: '',
       riverTop: [],
+      river2Top: [],
       riverTnum: null,
       pile: null,
       win: false
@@ -57894,6 +57899,13 @@ var Game = function (_React$Component) {
             _this3.setState({
               gameinit: true,
               selected: null
+            }, function () {
+              //cut three from player 2's hand 
+              // let riv2top = deal(this.state.p2hand, 3);
+              // console.log(deal(this.state.p2hand, 3), 'what')
+              _this3.setState({
+                river2Top: (0, _deck.deal)(_this3.state.p2hand, 3)
+              });
             });
           }
         });
@@ -57912,7 +57924,16 @@ var Game = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'player2-river' },
-            _react2.default.createElement(_River2.default, { p2river: this.state.p2river })
+            _react2.default.createElement(
+              'div',
+              { className: 'river-bottom' },
+              _react2.default.createElement(_River2.default, { p2river: this.state.p2river })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'river-top' },
+              _react2.default.createElement(_River2Top2.default, { river2Top: this.state.river2Top, select: this.onselect })
+            )
           ),
           _react2.default.createElement(
             'div',
@@ -58383,6 +58404,59 @@ exports.default = River2;
 
 /***/ }),
 /* 525 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function River2Top(props) {
+  return _react2.default.createElement(
+    "div",
+    null,
+    props.river2Top.length > 0 ? props.river2Top.map(function (card) {
+      return _react2.default.createElement(
+        "div",
+        { key: card.rank + card.suit + (Math.random() * 50 + 1), className: "card p2hand", value: JSON.stringify(card), onClick: function onClick(e) {
+            return props.select(e);
+          } },
+        _react2.default.createElement(
+          "div",
+          { className: "rank" },
+          _react2.default.createElement(
+            "span",
+            null,
+            card.rank
+          ),
+          _react2.default.createElement(
+            "div",
+            { className: "suit" },
+            _react2.default.createElement("div", { className: card.suit })
+          ),
+          _react2.default.createElement(
+            "span",
+            { className: "bottom-right" },
+            card.rank
+          )
+        )
+      );
+    }) : _react2.default.createElement("div", null)
+  );
+};
+
+exports.default = River2Top;
+
+/***/ }),
+/* 526 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
