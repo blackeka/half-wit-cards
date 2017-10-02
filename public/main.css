@@ -252,6 +252,11 @@ ul {
 	position: relative;
 }
 
+.new-game {
+	padding-left: 10px;
+	text-decoration: underline;
+}
+
 .win {
 	margin: 10px;
 	padding: 10px;

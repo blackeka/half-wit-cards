@@ -4,15 +4,9 @@ import Signup from './Signup.jsx';
 import Login from './Login.jsx';
 import Card from './Card.jsx';
 import Game from './Game.jsx';
+import Deal from './Deal.jsx';
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-     
-    };
-  }
- 
   render() {
     return (
       <div className="main">
@@ -28,5 +22,4 @@ class App extends React.Component {
   }
 }
 
-{/* <Card /> */}
 export default App;

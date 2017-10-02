@@ -29,7 +29,6 @@ class Login extends React.Component {
     let password = this.state.password;
     axios.get('/login', {params: {username, password}})
     .then((result) => {
-      console.log('in login in  axios')
         if (result.data) {
           this.setState({
             loggedIn: true,
@@ -43,7 +42,7 @@ class Login extends React.Component {
         }
       })
       .catch((err) => {
-        console.error('is it this one?', err);
+        console.error(err);
       })
   }
 

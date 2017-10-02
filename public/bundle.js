@@ -20039,13 +20039,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Nav = function (_React$Component) {
   _inherits(Nav, _React$Component);
 
-  function Nav() {
+  function Nav(props) {
     _classCallCheck(this, Nav);
 
-    return _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Nav.__proto__ || Object.getPrototypeOf(Nav)).call(this, props));
+
+    _this.refreshPage = _this.refreshPage.bind(_this);
+    return _this;
   }
 
   _createClass(Nav, [{
+    key: 'refreshPage',
+    value: function refreshPage() {
+      window.location.reload();
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -20067,9 +20075,23 @@ var Nav = function (_React$Component) {
             'ul',
             { className: 'nav navbar-nav' },
             _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/cards' },
-              'Shuffle'
+              'li',
+              null,
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/cards' },
+                'Shuffle'
+              )
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              'li',
+              { className: 'new-game' },
+              _react2.default.createElement(
+                'a',
+                { onClick: this.refreshPage },
+                'New Game'
+              )
             )
           ),
           _react2.default.createElement(
@@ -45150,6 +45172,10 @@ var _Game = __webpack_require__(518);
 
 var _Game2 = _interopRequireDefault(_Game);
 
+var _Deal = __webpack_require__(525);
+
+var _Deal2 = _interopRequireDefault(_Deal);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -45164,10 +45190,7 @@ var App = function (_React$Component) {
   function App() {
     _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
-
-    _this.state = {};
-    return _this;
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
   }
 
   _createClass(App, [{
@@ -45191,7 +45214,6 @@ var App = function (_React$Component) {
   return App;
 }(_react2.default.Component);
 
-{/* <Card /> */}
 exports.default = App;
 
 /***/ }),
@@ -57329,7 +57351,6 @@ var Login = function (_React$Component) {
       var username = this.state.username;
       var password = this.state.password;
       _axios2.default.get('/login', { params: { username: username, password: password } }).then(function (result) {
-        console.log('in login in  axios');
         if (result.data) {
           _this2.setState({
             loggedIn: true,
@@ -57342,7 +57363,7 @@ var Login = function (_React$Component) {
           });
         }
       }).catch(function (err) {
-        console.error('is it this one?', err);
+        console.error(err);
       });
     }
   }, {
@@ -58359,6 +58380,35 @@ function River2(props) {
 }
 
 exports.default = River2;
+
+/***/ }),
+/* 525 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function Deal(props) {
+  return _react2.default.createElement(
+    "button",
+    { className: "btn-deal", onClick: function onClick() {
+        return props.dealClick();
+      } },
+    "Deal Cards"
+  );
+}
+
+exports.default = Deal;
 
 /***/ })
 /******/ ]);

@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/blackeka/half-wit-cards/issues"
   },
-  "homepage": "https://dashboard.heroku.com/apps/half-wit-cards",
+  "homepage": "https://dashboard.heroku.com/apps/half-wit-cards/#/login",
   "dependencies": {
     "axios": "^0.16.2",
     "babel-core": "^6.26.0",
