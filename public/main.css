@@ -58,7 +58,7 @@ span.bottom-right {
 }
 
 .card-back {
-	background-image: url('images/minion.png');
+	background-image: url('images/backside.png');
 	background-size: contain;
 	background-repeat:no-repeat;	
 	z-index: 1;
