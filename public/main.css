@@ -58,10 +58,17 @@ span.bottom-right {
 }
 
 .card-back {
-	background-image: url('images/backside.png');
-	background-size: contain;
-	background-repeat:no-repeat;	
+	/* background-image: url('images/backside.png'); */
+	/* background-size: contain; */
+	/* background-repeat:no-repeat;	 */
+	background: repeating-radial-gradient(rgb(229, 245, 10), rgba(111, 0, 255, 0.918) 5px, rgba(234, 0, 255, 0.973) 5px, yellow 10px),
+		linear-gradient(217deg, rgb(229, 245, 10), rgba(187, 235, 11, 0.979) 70.71%),
+		linear-gradient(127deg, rgba(234, 0, 255, 0.973), rgba(111, 0, 255, 0.918) 70.71%),
+		linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
 	z-index: 1;
+	border-radius: 12px;
+	width: 97px;
+	height: 152px;
 }
 
 div.hidden {
