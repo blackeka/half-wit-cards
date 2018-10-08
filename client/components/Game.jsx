@@ -12,6 +12,7 @@ import River2Top from './River2Top.jsx';
 // import {handleSend, handleTyping} from '../../public/socket.js';
 
 class Game extends React.Component {
+  //TODO update game logic to work as 2 player
   constructor(props) {
     super(props);
     this.state = {

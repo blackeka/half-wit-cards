@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Redirect, Link } from 'react-router-dom';
 import {Navbar, Jumbotron, Button, Form, FormControl, FormGroup} from 'react-bootstrap';
 
+//TODO add a tutorial page
 class Signup extends React.Component {
   constructor(props) {
     super(props)

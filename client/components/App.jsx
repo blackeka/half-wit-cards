@@ -6,6 +6,10 @@ import Card from './Card.jsx';
 import Game from './Game.jsx';
 import Deal from './Deal.jsx';
 
+//TODO mobile friendly
+//TODO realtime
+//TODO save stats
+//TODO save games to return to
 class App extends React.Component {
   render() {
     return (
